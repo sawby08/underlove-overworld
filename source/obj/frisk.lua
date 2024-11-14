@@ -7,8 +7,8 @@ local speed = 5
 local direction = 'down'
 local canAnimate = false
 
-local x = 0
-local y = 0
+local x = 320
+local y = 240
 local lastx
 local lasty
 
@@ -48,6 +48,8 @@ function frisk.load()
     frames.right[2] = love.graphics.newQuad(160, 0, 20, 30, friskSpritesheet)
     frames.right[3] = love.graphics.newQuad(200, 0, 20, 30, friskSpritesheet)
     frames.right[4] = love.graphics.newQuad(220, 0, 20, 30, friskSpritesheet)
+
+    frisk.collider = HC.rectangle(0, 0, 30, 24)
 end
 
 function frisk.update(dt)
@@ -89,6 +91,8 @@ function frisk.update(dt)
     else
         curFrame = 1
     end
+
+    frisk.collider:moveTo(x+20, y+46)
 end
 
 function frisk.draw()
