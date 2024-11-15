@@ -21,12 +21,13 @@ function room.load(path)
 
             verts = {}
             for i, obj in ipairs(obj.polygon) do
-                local points = {x = obj.x, y = obj.y}
-                table.insert(verts, points)
+                -- local points = {x = obj.x, y = obj.y}
+                table.insert(verts, obj.x)
+                table.insert(verts, obj.y)
             end
 
-            for i, point in ipairs(verts) do
-                print(point.x .. ' ' .. point.y)
+            for i, vert in ipairs(verts) do
+                print(vert)
             end
         
             local wall = HC.polygon(verts)
