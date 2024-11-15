@@ -19,18 +19,18 @@ function room.load(path)
             polyAmt = polyAmt + 1
             print("polygon #" .. polyAmt)
 
-            verts = {}
-            for i, obj in ipairs(obj.polygon) do
+            local verts = {}
+            for i, objPoint in ipairs(obj.polygon) do
                 -- local points = {x = obj.x, y = obj.y}
-                table.insert(verts, obj.x)
-                table.insert(verts, obj.y)
+                table.insert(verts, objPoint.x)
+                table.insert(verts, objPoint.y)
             end
 
             for i, vert in ipairs(verts) do
                 print(vert)
             end
-        
-            local wall = HC.polygon(verts)
+
+            local wall = HC.polygon(unpack(verts))
             table.insert(polyWalls, wall)
         end
         if obj.shape == "rectangle" then
