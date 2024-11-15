@@ -51,21 +51,7 @@ function room.load(path)
 end
 
 function room.update(dt)
-    for i, wall in ipairs(polyWalls) do
-        if wall:collidesWith(frisk.collider) then
-            print("collision detected!")
-        end
-    end
-    for i, wall in ipairs(rectWalls) do
-        if wall:collidesWith(frisk.collider) then
-            print("collision detected!")
-        end
-    end
-    for i, wall in ipairs(ellipseWalls) do
-        if wall:collidesWith(frisk.collider) then
-            print("collision detected!")
-        end
-    end
+
 end
 
 function room.draw()

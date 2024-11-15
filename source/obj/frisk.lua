@@ -9,7 +9,7 @@ local canAnimate = false
 
 local x = 320
 local y = 240
-local lastx, lasty
+local lastx, lasty = 0, 0
 local vx, vy = 0, 0
 
 local frames = {}
@@ -81,6 +81,22 @@ function frisk.update(dt)
         direction = 'down'
     elseif vy < 0 then
         direction = 'up'
+    end
+
+    for i, wall in ipairs(polyWalls) do
+        if wall:collidesWith(frisk.collider) then
+            frisk.collider:moveTo(lastx, lasty)
+        end
+    end
+    for i, wall in ipairs(rectWalls) do
+        if wall:collidesWith(frisk.collider) then
+            frisk.collider:moveTo(lastx, lasty)
+        end
+    end
+    for i, wall in ipairs(ellipseWalls) do
+        if wall:collidesWith(frisk.collider) then
+            frisk.collider:moveTo(lastx, lasty)
+        end
     end
 
     colliderx, collidery = frisk.collider:center()
