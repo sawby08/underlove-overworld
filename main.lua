@@ -1,8 +1,10 @@
 -- main.lua
 
 require 'lib.fpsLimiter'
+
 sti = require 'lib.sti'
 HC = require 'lib.hc'
+wf = require 'lib.windfield'
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')

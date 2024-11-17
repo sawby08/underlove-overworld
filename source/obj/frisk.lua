@@ -51,25 +51,31 @@ function frisk.load()
     frames.right[3] = love.graphics.newQuad(200, 0, 20, 30, friskSpritesheet)
     frames.right[4] = love.graphics.newQuad(220, 0, 20, 30, friskSpritesheet)
 
-    frisk.collider = HC.rectangle(320, 240, 30, 24)
+    frisk.collider = world:newRectangleCollider(320, 240, 37, 30)
+    frisk.collider:setFixedRotation(true)
 end
 
 function frisk.update(dt)
     lastx = colliderx
     lasty = collidery
 
+    local vx = 0
+    local vy = 0
+
     if love.keyboard.isDown('left') then
-        frisk.collider:move(-speed*deltaMultiplier, 0)
+        vx = vx - speed*deltaMultiplier * 30
     end
     if love.keyboard.isDown('up') then
-        frisk.collider:move(0, -speed*deltaMultiplier)
+        vy = vx - speed*deltaMultiplier * 30
     end
     if love.keyboard.isDown('down') then
-        frisk.collider:move(0, speed*deltaMultiplier)
+        vy = vy + speed*deltaMultiplier * 30
     end
     if love.keyboard.isDown('right') then
-        frisk.collider:move(speed*deltaMultiplier, 0)
+        vx = vx + speed*deltaMultiplier * 30
     end
+
+    frisk.collider:setLinearVelocity(vx, vy)
 
     if vx > 0 then
         direction = 'right'
@@ -83,23 +89,7 @@ function frisk.update(dt)
         direction = 'up'
     end
 
-    for i, wall in ipairs(polyWalls) do
-        if wall:collidesWith(frisk.collider) then
-            frisk.collider:moveTo(lastx, lasty)
-        end
-    end
-    for i, wall in ipairs(rectWalls) do
-        if wall:collidesWith(frisk.collider) then
-            frisk.collider:moveTo(lastx, lasty)
-        end
-    end
-    for i, wall in ipairs(ellipseWalls) do
-        if wall:collidesWith(frisk.collider) then
-            frisk.collider:moveTo(lastx, lasty)
-        end
-    end
-
-    colliderx, collidery = frisk.collider:center()
+    colliderx, collidery = frisk.collider:getX(), frisk.collider:getY()
 
     vx = colliderx - lastx
     vy = collidery - lasty
@@ -126,13 +116,13 @@ end
 
 function frisk.draw()
     if direction == 'up' then
-        love.graphics.draw(friskSpritesheet, frames.up[curFrame], colliderx-18, collidery-46, 0, 2)
+        love.graphics.draw(friskSpritesheet, frames.up[curFrame], colliderx-19, collidery-46, 0, 2)
     elseif direction == 'down' then
-        love.graphics.draw(friskSpritesheet, frames.down[curFrame], colliderx-18, collidery-46, 0, 2)
+        love.graphics.draw(friskSpritesheet, frames.down[curFrame], colliderx-19, collidery-46, 0, 2)
     elseif direction == 'left' then
-        love.graphics.draw(friskSpritesheet, frames.left[curFrame], colliderx-18, collidery-46, 0, 2)
+        love.graphics.draw(friskSpritesheet, frames.left[curFrame], colliderx-19, collidery-46, 0, 2)
     elseif direction == 'right' then
-        love.graphics.draw(friskSpritesheet, frames.right[curFrame], colliderx-18, collidery-46, 0, 2)
+        love.graphics.draw(friskSpritesheet, frames.right[curFrame], colliderx-19, collidery-46, 0, 2)
     end
 end
 
