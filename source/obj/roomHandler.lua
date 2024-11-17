@@ -58,19 +58,6 @@ end
 
 function room.draw()
     -- map:draw()
-    for i, wall in ipairs(polyWalls) do
-        love.graphics.setColor(0, 1, 0)
-        --wall:draw()
-    end
-    for i, wall in ipairs(rectWalls) do
-        love.graphics.setColor(0, 1, 0)
-        --wall:draw()
-    end
-    for i, wall in ipairs(ellipseWalls) do
-        love.graphics.setColor(0, 1, 0)
-        --wall:draw()
-    end
-    love.graphics.setColor(1, 1, 1)
 end
 
 
