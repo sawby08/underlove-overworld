@@ -2,22 +2,19 @@
 
 frisk = {}
 
-local friskSpritesheet
 local speed = 5
+
 local direction = 'down'
 local canAnimate = false
-
-local x = 320
-local y = 240
 local lastx, lasty = 0, 0
 local vx, vy = 0, 0
+local colliderx, collidery = 0, 0
 
 local frames = {}
+local friskSpritesheet
 local curFrame = 1
 
 local timeSince = 0
-
-local colliderx, collidery = 0, 0
 
 
 function frisk.load()
@@ -62,18 +59,20 @@ function frisk.update(dt)
     local vx = 0
     local vy = 0
 
-    if love.keyboard.isDown('left') then
-        vx = vx - speed*deltaMultiplier * 30
-    end
     if love.keyboard.isDown('up') then
         vy = vx - speed*deltaMultiplier * 30
     end
     if love.keyboard.isDown('down') then
         vy = vy + speed*deltaMultiplier * 30
     end
+    if love.keyboard.isDown('left') then
+        vx = vx - speed*deltaMultiplier * 30
+    end
     if love.keyboard.isDown('right') then
         vx = vx + speed*deltaMultiplier * 30
     end
+
+    x, y = frisk.collider:getX(), frisk.collider:getY()
 
     frisk.collider:setLinearVelocity(vx, vy)
 
@@ -89,7 +88,7 @@ function frisk.update(dt)
         direction = 'up'
     end
 
-    colliderx, collidery = frisk.collider:getX(), frisk.collider:getY()
+    colliderx, collidery = math.floor(frisk.collider:getX()), math.floor(frisk.collider:getY())
 
     vx = colliderx - lastx
     vy = collidery - lasty
