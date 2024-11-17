@@ -57,7 +57,11 @@ function room.update(dt)
 end
 
 function room.draw()
-    -- map:draw()
+    for i, layer in pairs(map.layers) do
+        if layer.type == 'tilelayer' then
+            layer:draw()
+        end
+    end
 end
 
 

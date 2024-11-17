@@ -2,7 +2,7 @@
 
 frisk = {}
 
-local speed = 5
+local speed = 120 -- original speed is 4, but multiplied by 30 due to dumb deltatime stuff
 
 local direction = 'down'
 local canAnimate = false
@@ -16,39 +16,27 @@ local curFrame = 1
 
 local timeSince = 0
 
+local function setupQuads(width, height, frames, source, offset)
+    local i = 0
+    local loadedFrames = {}
+    repeat
+        table.insert(loadedFrames, love.graphics.newQuad(offset + width * i, 0, width, height, source))
+        i = i + 1
+    until i == frames
+    return unpack(loadedFrames)
+end
 
 function frisk.load()
     friskSpritesheet = love.graphics.newImage("assets/images/frisk.png")
     
     frames = {
-        up = {},
-        down = {},
-        right = {},
-        left = {}
+        up = {setupQuads(20, 30, 4, friskSpritesheet, 240)},
+        down = {setupQuads(20, 30, 4, friskSpritesheet, 0)},
+        right = {setupQuads(20, 30, 4, friskSpritesheet, 160)},
+        left = {setupQuads(20, 30, 4, friskSpritesheet, 80)}
     }
 
-    frames.up[1] = love.graphics.newQuad(240, 0, 20, 30, friskSpritesheet)
-    frames.up[2] = love.graphics.newQuad(280, 0, 20, 30, friskSpritesheet)
-    frames.up[3] = love.graphics.newQuad(260, 0, 20, 30, friskSpritesheet)
-    frames.up[4] = love.graphics.newQuad(300, 0, 20, 30, friskSpritesheet)
-
-    
-    frames.down[1] = love.graphics.newQuad(0, 0, 20, 30, friskSpritesheet)
-    frames.down[2] = love.graphics.newQuad(20, 0, 20, 30, friskSpritesheet)
-    frames.down[3] = love.graphics.newQuad(40, 0, 20, 30, friskSpritesheet)
-    frames.down[4] = love.graphics.newQuad(60, 0, 20, 30, friskSpritesheet)
-
-    frames.left[1] = love.graphics.newQuad(80, 0, 20, 30, friskSpritesheet)
-    frames.left[2] = love.graphics.newQuad(100, 0, 20, 30, friskSpritesheet)
-    frames.left[3] = love.graphics.newQuad(120, 0, 20, 30, friskSpritesheet)
-    frames.left[4] = love.graphics.newQuad(140, 0, 20, 30, friskSpritesheet)
-
-    frames.right[1] = love.graphics.newQuad(180, 0, 20, 30, friskSpritesheet)
-    frames.right[2] = love.graphics.newQuad(160, 0, 20, 30, friskSpritesheet)
-    frames.right[3] = love.graphics.newQuad(200, 0, 20, 30, friskSpritesheet)
-    frames.right[4] = love.graphics.newQuad(220, 0, 20, 30, friskSpritesheet)
-
-    frisk.collider = world:newRectangleCollider(320, 240, 37, 30)
+    frisk.collider = world:newRectangleCollider(320, 240, 32, 28)
     frisk.collider:setFixedRotation(true)
 end
 
@@ -60,16 +48,16 @@ function frisk.update(dt)
     local vy = 0
 
     if love.keyboard.isDown('up') then
-        vy = vx - speed*deltaMultiplier * 30
+        vy = vy - speed
     end
     if love.keyboard.isDown('down') then
-        vy = vy + speed*deltaMultiplier * 30
+        vy = vy + speed
     end
     if love.keyboard.isDown('left') then
-        vx = vx - speed*deltaMultiplier * 30
+        vx = vx - speed
     end
     if love.keyboard.isDown('right') then
-        vx = vx + speed*deltaMultiplier * 30
+        vx = vx + speed
     end
 
     x, y = frisk.collider:getX(), frisk.collider:getY()
@@ -114,14 +102,10 @@ function frisk.update(dt)
 end
 
 function frisk.draw()
-    if direction == 'up' then
-        love.graphics.draw(friskSpritesheet, frames.up[curFrame], colliderx-19, collidery-46, 0, 2)
-    elseif direction == 'down' then
-        love.graphics.draw(friskSpritesheet, frames.down[curFrame], colliderx-19, collidery-46, 0, 2)
-    elseif direction == 'left' then
-        love.graphics.draw(friskSpritesheet, frames.left[curFrame], colliderx-19, collidery-46, 0, 2)
-    elseif direction == 'right' then
-        love.graphics.draw(friskSpritesheet, frames.right[curFrame], colliderx-19, collidery-46, 0, 2)
+    local directionFrames = {up = frames.up, down = frames.down, left = frames.left, right = frames.right}
+    local currentFrames = directionFrames[direction]
+    if currentFrames then
+        love.graphics.draw(friskSpritesheet, currentFrames[curFrame], colliderx - 20, collidery - 48, 0, 2)
     end
 end
 

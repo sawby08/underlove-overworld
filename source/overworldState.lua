@@ -25,7 +25,7 @@ function game.draw()
     frisk.draw()
 
     love.graphics.setColor(0, 1, 0)
-    world:draw()
+    -- world:draw(1, 0, 0)
 end
 
 return game

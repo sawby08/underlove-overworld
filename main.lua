@@ -17,7 +17,6 @@ function love.load()
 end
 
 function love.update(dt)
-    deltaMultiplier = dt * 30
     curState.update(dt)
 end
 
