@@ -3,6 +3,9 @@
  <editorsettings>
   <export target="../test1.lua" format="lua"/>
  </editorsettings>
+ <properties>
+  <property name="backgroundMusic" value="assets/sound/mus_ow1.ogg"/>
+ </properties>
  <tileset firstgid="1" name="test" tilewidth="20" tileheight="20" tilecount="6" columns="2">
   <image source="../tilesets/test.png" width="40" height="60"/>
  </tileset>

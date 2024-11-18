@@ -27,3 +27,9 @@ function love.draw()
     curState.draw()
     camera:detach()
 end
+
+function love.keypressed(key)
+    if key == '1' then
+        curState.load()
+    end
+end

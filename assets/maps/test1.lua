@@ -11,7 +11,9 @@ return {
   tileheight = 20,
   nextlayerid = 5,
   nextobjectid = 209,
-  properties = {},
+  properties = {
+    ["backgroundMusic"] = "assets/sound/mus_ow1.ogg"
+  },
   tilesets = {
     {
       name = "test",
