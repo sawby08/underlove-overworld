@@ -34,12 +34,12 @@ end
 
 function game.draw()
     love.graphics.setColor(1, 1, 1)
-    room.draw()
-    frisk.draw()
 
-    if love.keyboard.isDown("space") then
-        world:draw(1, 0, 0)
-    end
+    camera:attach()
+        room.draw()
+        frisk.draw()
+        if love.keyboard.isDown('space') then world:draw(1, 0, 0) end
+    camera:detach()
 end
 
 return game

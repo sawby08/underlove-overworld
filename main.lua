@@ -23,9 +23,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    camera:attach()
-        curState.draw()
-    camera:detach()
+    curState.draw()
 end
 
 function love.keypressed(key)

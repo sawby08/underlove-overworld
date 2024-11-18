@@ -36,8 +36,10 @@ function frisk.load()
         left = {setupQuads(20, 30, 4, friskSpritesheet, 80)}
     }
 
-    frisk.collider = world:newRectangleCollider(320, 240, 32, 28)
-    frisk.collider:setFixedRotation(true)
+    world:addCollisionClass('player')
+        frisk.collider = world:newRectangleCollider(320, 240, 32, 28)
+        frisk.collider:setFixedRotation(true)
+    frisk.collider:setCollisionClass('player')
 end
 
 function frisk.update(dt)
