@@ -75,7 +75,6 @@ end
 
 function World:draw(r, g, b, a)
     -- get the current color values to reapply
-    local r, g, b, a = love.graphics.getColor()
     -- alpha value is optional
     alpha = a or 255
     -- Colliders debug

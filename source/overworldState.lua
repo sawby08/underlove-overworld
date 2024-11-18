@@ -24,8 +24,9 @@ function game.draw()
     room.draw()
     frisk.draw()
 
-    love.graphics.setColor(0, 1, 0)
-    -- world:draw(1, 0, 0)
+    if love.keyboard.isDown("space") then
+        world:draw(1, 0, 0)
+    end
 end
 
 return game

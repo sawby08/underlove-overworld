@@ -48,19 +48,23 @@ function frisk.update(dt)
     local vy = 0
 
     if love.keyboard.isDown('up') then
+        direction = 'up'
         vy = vy - speed
     end
     if love.keyboard.isDown('down') then
+        direction = 'down'
         vy = vy + speed
     end
     if love.keyboard.isDown('left') then
+        direction = 'left'
         vx = vx - speed
     end
     if love.keyboard.isDown('right') then
+        direction = 'right'
         vx = vx + speed
     end
 
-    if love.keyboard.isDown('x') then
+    if love.keyboard.isDown('x') or love.keyboard.isDown('lshift') or love.keyboard.isDown('rshift') then
         speed = 180
     else
         speed = 120
@@ -74,18 +78,6 @@ function frisk.update(dt)
 
     vx = colliderx - lastx
     vy = collidery - lasty
-
-    if vx > 0  then
-        direction = 'right'
-    elseif vx < 0 then
-        direction = 'left'
-    end
-
-    if vy > 0 then
-        direction = 'down'
-    elseif vy < 0 then
-        direction = 'up'
-    end
 
     if colliderx ~= lastx or collidery ~= lasty then
         canAnimate = true
