@@ -48,8 +48,6 @@ function room.load(path)
             table.insert(ellipseWalls, wall)
         end
     end
-
-    collider = HC.new(0)
 end
 
 function room.update(dt)
@@ -57,8 +55,8 @@ function room.update(dt)
 end
 
 function room.draw()
-    for i, layer in pairs(map.layers) do
-        if layer.type == 'tilelayer' then
+    for i, layer in ipairs(map.layers) do
+        if layer.type == "tilelayer" then
             layer:draw()
         end
     end

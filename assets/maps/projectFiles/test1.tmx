@@ -6,7 +6,7 @@
  <tileset firstgid="1" name="test" tilewidth="20" tileheight="20" tilecount="6" columns="2">
   <image source="../tilesets/test.png" width="40" height="60"/>
  </tileset>
- <group id="3" name="tileLayers">
+ <group id="3" name="roomTiles">
   <layer id="4" name="background" width="32" height="24">
    <data encoding="csv">
 6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,

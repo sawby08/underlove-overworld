@@ -64,22 +64,22 @@ function frisk.update(dt)
 
     frisk.collider:setLinearVelocity(vx, vy)
 
-    if vx > 0 then
-        direction = 'right'
-    elseif vx < 0 then
-        direction = 'left'
-    end
-
-    if vy > 0 then
-        direction = 'down'
-    elseif vy < 0 then
-        direction = 'up'
-    end
-
     colliderx, collidery = math.floor(frisk.collider:getX()), math.floor(frisk.collider:getY())
 
     vx = colliderx - lastx
     vy = collidery - lasty
+
+    if vx > 0 and vy == 0 then
+        direction = 'right'
+    elseif vx < 0 and vy == 0 then
+        direction = 'left'
+    end
+
+    if vy > 0 and vx == 0 then
+        direction = 'down'
+    elseif vy < 0 and vx == 0 then
+        direction = 'up'
+    end
 
     if colliderx ~= lastx or collidery ~= lasty then
         canAnimate = true
@@ -105,7 +105,7 @@ function frisk.draw()
     local directionFrames = {up = frames.up, down = frames.down, left = frames.left, right = frames.right}
     local currentFrames = directionFrames[direction]
     if currentFrames then
-        love.graphics.draw(friskSpritesheet, currentFrames[curFrame], colliderx - 20, collidery - 48, 0, 2)
+        love.graphics.draw(friskSpritesheet, currentFrames[curFrame], math.floor(frisk.collider:getX()) - 20, math.floor(frisk.collider:getY()) - 48, 0, 2)
     end
 end
 

@@ -47,7 +47,7 @@ return {
     {
       type = "group",
       id = 3,
-      name = "tileLayers",
+      name = "roomTiles",
       class = "",
       visible = true,
       opacity = 1,
