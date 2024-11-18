@@ -70,10 +70,7 @@ function frisk.update(dt)
         speed = 120
     end
 
-    x, y = frisk.collider:getX(), frisk.collider:getY()
-
     frisk.collider:setLinearVelocity(vx, vy)
-
     colliderx, collidery = math.floor(frisk.collider:getX()), math.floor(frisk.collider:getY())
 
     vx = colliderx - lastx

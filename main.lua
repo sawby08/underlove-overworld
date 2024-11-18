@@ -3,8 +3,10 @@
 require 'lib.fpsLimiter'
 
 sti = require 'lib.sti'
-HC = require 'lib.hc'
 wf = require 'lib.windfield'
+
+Camera = require 'lib.camera'
+camera = Camera()
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -21,5 +23,7 @@ function love.update(dt)
 end
 
 function love.draw()
+    camera:attach()
     curState.draw()
+    camera:detach()
 end
