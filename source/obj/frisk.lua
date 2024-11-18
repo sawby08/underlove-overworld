@@ -60,6 +60,12 @@ function frisk.update(dt)
         vx = vx + speed
     end
 
+    if love.keyboard.isDown('x') then
+        speed = 180
+    else
+        speed = 120
+    end
+
     x, y = frisk.collider:getX(), frisk.collider:getY()
 
     frisk.collider:setLinearVelocity(vx, vy)
