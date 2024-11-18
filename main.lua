@@ -24,7 +24,7 @@ end
 
 function love.draw()
     camera:attach()
-    curState.draw()
+        curState.draw()
     camera:detach()
 end
 
