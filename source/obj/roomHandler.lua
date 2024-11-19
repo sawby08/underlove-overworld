@@ -1,6 +1,4 @@
 -- room.lua
-local currentBGM
-local newBGM
 
 room = {}
 
@@ -14,13 +12,6 @@ function room.load(path)
     polyWalls = {}
     rectWalls = {}
     ellipseWalls = {}
-
-    -- how tf you get this shit to NOT RESTART WHEN RELOADING THE STATE!! Press 1 to restart the state btw
-    newBGM = love.audio.newSource(map.properties['backgroundMusic'], 'stream')
-    if currentBGM ~= newBGM then
-        if currentBGM then currentBGM:stop() end
-        currentBGM = newBGM
-    end
 
     for i, obj in pairs(map.layers["collision"].objects) do
         if obj.shape == "polygon" then
@@ -60,8 +51,7 @@ function room.load(path)
 end
 
 function room.update(dt)
-    currentBGM:play()
-    currentBGM:setLooping(true)
+    
 end
 
 function room.draw()

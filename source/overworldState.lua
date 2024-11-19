@@ -12,7 +12,20 @@ local function lockCamera()
     camera:lookAt(x, y)
 end
 
+local function unloadPackages()
+    if frisk then
+        package.loaded[frisk] = nil
+    end
+    if room then
+        package.loaded[room] = nil
+    end
+    if world then
+        world:destroy()
+    end
+end
+
 function game.load()
+    unloadPackages()
     frisk = require 'source.obj.frisk'
     room = require 'source.obj.roomHandler'
 

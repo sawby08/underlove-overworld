@@ -24,6 +24,10 @@ end
 
 function love.draw()
     curState.draw()
+    love.graphics.push()
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.print(collectgarbage("count"))
+    love.graphics.pop()
 end
 
 function love.keypressed(key)
