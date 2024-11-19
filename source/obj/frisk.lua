@@ -62,15 +62,15 @@ function frisk.update(dt)
         vx = vx + speed
     end
 
-    if vx > 0 then
+    if vx > 0 and vy == 0 then
         direction = 'right'
-    elseif vx < 0 then
+    elseif vx < 0 and vy == 0 then
         direction = 'left'
     end
 
-    if vy > 0 then
+    if vy > 0 and vx == 0 then
         direction = 'down'
-    elseif vy < 0 then
+    elseif vy < 0 and vx == 0 then
         direction = 'up'
     end
 
