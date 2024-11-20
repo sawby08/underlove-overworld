@@ -1,2 +1,3 @@
 # underlove-overworld
-<p>underlove overworld version i think LOL i don't really care enough to write a proper readme right now</p>
+[Battle Engine](https://github.com/bradensMG/underlove)
+<p>Hey! This is the overworld engine for UNDERLOVE! It's unfinished, but I'm confident that /p>
