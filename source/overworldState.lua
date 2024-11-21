@@ -51,7 +51,7 @@ function game.draw()
 
     camera:attach()
         love.graphics.push()
-            love.graphics.scale(2)
+            love.graphics.scale(1)
             room.draw()
         love.graphics.pop()
         frisk.draw()
