@@ -1,6 +1,7 @@
 -- overworld.lua
 
 game = {}
+local currentRoom = 'snowdintest1'
 
 local function lockCamera()
     local x, y = camera:position()
@@ -32,7 +33,7 @@ function game.load()
     world = wf.newWorld(0, 0)
 
     frisk.load()
-    room.load("assets/maps/test1.lua")
+    room.load("assets/maps/" .. currentRoom .. ".lua")
 end
 
 function game.update(dt)
@@ -49,7 +50,10 @@ function game.draw()
     love.graphics.setColor(1, 1, 1)
 
     camera:attach()
-        room.draw()
+        love.graphics.push()
+            love.graphics.scale(2)
+            room.draw()
+        love.graphics.pop()
         frisk.draw()
         if love.keyboard.isDown('space') then world:draw(1, 0, 0) end
     camera:detach()
