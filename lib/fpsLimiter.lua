@@ -1,7 +1,7 @@
 -- fpsLimiter.lua
 -- written by https://love2d.org/forums/viewtopic.php?p=199030&sid=5e50e42e22e4538ca0f3f7b0717aa2f2#p199030
 
-FPS = 0
+FPS = 30
 
 local timerSleep = function () return 1/FPS end
 function love.run()
