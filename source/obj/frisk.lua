@@ -1,6 +1,6 @@
 -- frisk.lua
 
-frisk = {}
+local frisk = {}
 
 local speed = 120 -- original speed is 4, but multiplied by 30 due to dumb deltatime stuff
 
@@ -26,6 +26,46 @@ local function setupQuads(width, height, frames, source, offset)
     return unpack(loadedFrames)
 end
 
+local function animate(dt)
+    if vx > 0 and vy == 0 then
+        direction = 'right'
+    elseif vx < 0 and vy == 0 then
+        direction = 'left'
+    end
+
+    if vy > 0 and vx == 0 then
+        direction = 'down'
+    elseif vy < 0 and vx == 0 then
+        direction = 'up'
+    end
+
+    if vx < 0 and direction == 'right' then
+        direction = 'left'
+    end
+    if vx > 0 and direction == 'left' then
+        direction = 'right'
+    end
+    if vy < 0 and direction == 'down' then
+        direction = 'op'
+    end
+    if vy > 0 and direction == 'up' then
+        direction = 'down'
+    end
+
+    if canAnimate then
+        timeSince = timeSince + dt
+        if timeSince > .2 then
+            curFrame = curFrame + 1
+            timeSince = 0
+            if curFrame > 4 then
+                curFrame = 1
+            end
+        end
+    else
+        curFrame = 1
+    end
+end
+
 function frisk.load()
     friskSpritesheet = love.graphics.newImage("assets/images/frisk.png")
     
@@ -45,9 +85,8 @@ end
 function frisk.update(dt)
     lastx = colliderx
     lasty = collidery
-
-    local vx = 0
-    local vy = 0
+    vx = 0
+    vy = 0
 
     if love.keyboard.isDown('up') then
         vy = vy - speed
@@ -62,17 +101,7 @@ function frisk.update(dt)
         vx = vx + speed
     end
 
-    if vx > 0 and vy == 0 then
-        direction = 'right'
-    elseif vx < 0 and vy == 0 then
-        direction = 'left'
-    end
-
-    if vy > 0 and vx == 0 then
-        direction = 'down'
-    elseif vy < 0 and vx == 0 then
-        direction = 'up'
-    end
+    animate(dt)
 
     if love.keyboard.isDown('x') or love.keyboard.isDown('lshift') or love.keyboard.isDown('rshift') then
         speed = 180
@@ -81,28 +110,12 @@ function frisk.update(dt)
     end
 
     frisk.collider:setLinearVelocity(vx, vy)
-    colliderx, collidery = math.floor(frisk.collider:getX()), math.floor(frisk.collider:getY())
-
-    vx = colliderx - lastx
-    vy = collidery - lasty
+    colliderx, collidery = frisk.collider:getX(), frisk.collider:getY()
 
     if colliderx ~= lastx or collidery ~= lasty then
         canAnimate = true
     else
         canAnimate = false
-    end
-
-    if canAnimate then
-        timeSince = timeSince + dt
-        if timeSince > .2 then
-            curFrame = curFrame + 1
-            timeSince = 0
-            if curFrame > 4 then
-                curFrame = 1
-            end
-        end
-    else
-        curFrame = 1
     end
 end
 
