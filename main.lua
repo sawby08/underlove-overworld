@@ -1,5 +1,7 @@
 -- main.lua
 
+local backgroundMusic
+
 require 'lib.fpsLimiter'
 
 sti = require 'lib.sti'
@@ -11,6 +13,8 @@ camera = Camera()
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
+    backgroundMusic = love.audio.newSource("assets/sound/mus_ow1.ogg", "stream")
+
     states = {
         overworld = require 'source.overworldState'
     }
@@ -19,6 +23,7 @@ function love.load()
 end
 
 function love.update(dt)
+    backgroundMusic:play()
     curState.update(dt)
 end
 

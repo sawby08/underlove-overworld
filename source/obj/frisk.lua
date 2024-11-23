@@ -53,7 +53,7 @@ local function animate(dt)
     end
 
     if canAnimate then
-        timeSince = timeSince + dt
+        timeSince = timeSince + dt*(speed/120)
         if timeSince > .2 then
             curFrame = curFrame + 1
             timeSince = 0
