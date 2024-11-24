@@ -80,6 +80,8 @@ function frisk.load()
         frisk.collider = world:newRectangleCollider(320, 240, 32, 28)
         frisk.collider:setFixedRotation(true)
     frisk.collider:setCollisionClass('player')
+
+    direction = 'down'
 end
 
 function frisk.update(dt)

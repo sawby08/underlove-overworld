@@ -1,7 +1,10 @@
 -- overworld.lua
 
 game = {}
-local currentRoom = 'test1'
+
+currentRoom = 'test1'
+local currentBGM, BGM
+local currentBGMpath, BGMpath
 
 local function lockCamera()
     local x, y = camera:position()
@@ -34,11 +37,27 @@ function game.load()
 
     frisk.load()
     room.load("assets/maps/" .. currentRoom .. ".lua")
+    
+    if map.properties['backgroundMusic'] then
+        BGMpath = map.properties['backgroundMusic']
+    else
+        BGMpath = 'assets/sound/snd_nosound.wav'
+    end
+
+    if BGMpath ~= currentBGMpath then
+        currentBGMpath = BGMpath
+        if currentBGM then
+            currentBGM:stop()
+        end
+        currentBGM = love.audio.newSource(currentBGMpath, 'stream')
+        currentBGM:setLooping(true)
+    end
 end
 
 function game.update(dt)
     frisk.update(dt)
     room.update(dt)
+    currentBGM:play()
 
     world:update(dt)
 
