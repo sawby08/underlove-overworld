@@ -1,8 +1,12 @@
--- overworld.lua
+-- overworldState.lua
 
-game = {}
+local game = {}
 
-currentRoom = 'test1'
+sti = require 'lib.sti'
+wf = require 'lib.windfield'
+local Camera = require 'lib.camera'
+local camera = Camera()
+
 local currentBGM, BGM
 local currentBGMpath, BGMpath
 
@@ -17,18 +21,12 @@ local function lockCamera()
 end
 
 local function unloadPackages()
-    if frisk then
-        package.loaded[frisk] = nil
-    end
-    if room then
-        package.loaded[room] = nil
-    end
-    if world then
-        world:destroy()
-    end
+    if frisk then package.loaded[frisk] = nil end
+    if room then package.loaded[room] = nil end
+    if world then world:destroy() end
 end
 
-function game.load()
+function game.load(loadRoom)
     unloadPackages()
     frisk = require 'source.obj.frisk'
     room = require 'source.obj.roomHandler'
@@ -36,7 +34,7 @@ function game.load()
     world = wf.newWorld(0, 0)
 
     frisk.load()
-    room.load("assets/maps/" .. currentRoom .. ".lua")
+    room.load("assets/maps/" .. loadRoom .. ".lua")
     
     if map.properties['backgroundMusic'] then
         BGMpath = map.properties['backgroundMusic']

@@ -1,6 +1,6 @@
 -- room.lua
 
-room = {}
+local room = {}
 
 function room.load(path)
     map = sti(path)
@@ -51,7 +51,7 @@ function room.load(path)
 end
 
 function room.update(dt)
-    
+    -- nothing yet i guess?
 end
 
 function room.draw()
@@ -61,6 +61,5 @@ function room.draw()
         end
     end
 end
-
 
 return room

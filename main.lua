@@ -1,12 +1,6 @@
 -- main.lua
 
-require 'lib.fpsLimiter'
-
-sti = require 'lib.sti'
-wf = require 'lib.windfield'
-
-Camera = require 'lib.camera'
-camera = Camera()
+local fpsLimiter = require 'lib.fpsLimiter'
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -15,7 +9,7 @@ function love.load()
         overworld = require 'source.overworldState'
     }
     curState = states.overworld
-    curState.load()
+    curState.load('test1')
 end
 
 function love.update(dt)
@@ -29,10 +23,10 @@ end
 function love.keypressed(key)
     if key == '1' then
         currentRoom = 'test1'
-        curState.load()
+        curState.load('test1')
     end
     if key == '2' then
         currentRoom = 'snowdintest1'
-        curState.load()
+        curState.load('snowdintest1')
     end
 end

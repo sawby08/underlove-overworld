@@ -129,5 +129,4 @@ function frisk.draw()
     end
 end
 
-
 return frisk
