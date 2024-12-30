@@ -1,6 +1,7 @@
 -- main.lua
 
 local fpsLimiter = require 'lib.fpsLimiter'
+local currentRoom
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
