@@ -52,17 +52,6 @@ function game.load(loadRoom)
         currentBGM = love.audio.newSource(currentBGMpath, 'stream')
         currentBGM:setLooping(true)
     end
-
-    local img = love.graphics.newImage('logo.png')
-
-	psystem = love.graphics.newParticleSystem(img)
-    psystem:setPosition(love.math.random(0, 360), -360)
-    psystem:setSizes(0.1, 0.2, 0.3, 0.4)
-	psystem:setParticleLifetime(5, 10) -- Particles live at least 2s and at most 5s.
-	psystem:setEmissionRate(32)
-	psystem:setSizeVariation(.5)
-	psystem:setLinearAcceleration(-20, 100, 2) -- Random movement in all directions.
-	psystem:setColors(1, 1, 1, 1) -- Fade to transparency.
 end
 
 function game.update(dt)
@@ -74,10 +63,6 @@ function game.update(dt)
 
     camera:lookAt(math.floor(frisk.collider:getX()), math.floor(frisk.collider:getY()))
     lockCamera()
-
-    psystem:setPosition(love.math.random(-260, 260), -275)
-
-    psystem:update(dt)
 end
 
 function game.draw()
@@ -87,9 +72,6 @@ function game.draw()
         frisk.draw()
         if love.keyboard.isDown('space') then world:draw(1, 0, 0) end
     camera:detach()
-    if currentRoom == 'snowdintest1' then
-        love.graphics.draw(psystem, love.graphics.getWidth() * 0.5, love.graphics.getHeight() * 0.5)
-    end
 end
 
 return game
