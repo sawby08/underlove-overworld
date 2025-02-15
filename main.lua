@@ -26,8 +26,4 @@ function love.keypressed(key)
         currentRoom = 'test1'
         curState.load('test1')
     end
-    if key == '2' then
-        currentRoom = 'snowdintest1'
-        curState.load('snowdintest1')
-    end
 end
